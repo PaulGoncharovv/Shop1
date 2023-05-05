@@ -9,6 +9,7 @@
         Регистрация пользователя
     </h3>
     <form   method="post" th:action="@{/registration}" th:object="${person}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <label for="login">Введите логин: </label>
         <input type="text" th:field="*{login}" id="login">
         <div style="color: red" th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></div>

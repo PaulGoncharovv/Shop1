@@ -6,7 +6,8 @@
 </head>
 <body>
  <h1>Личный кабинет администратора</h1>
-    <form method="post" action="/logout">
+    <form method="post" th:action="@{/logout}">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <button type="submit">Выйти из личного кабинета</button>
     </form>
 <a href="admin/product/add"></a>

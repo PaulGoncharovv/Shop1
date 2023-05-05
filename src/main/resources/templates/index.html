@@ -8,7 +8,11 @@
   <h3>
   Первое приложение на Spring Security
   </h3>
-  <a href="/logout">Выйти из личного кабинета</a>
 
+  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+  <form method="post" th:action="@{/logout}">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+      <button type="submit">Выйти из личного кабинета</button>
+  </form>
 </body>
 </html>

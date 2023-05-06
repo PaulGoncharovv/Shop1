@@ -9,7 +9,7 @@
   <p th:text="${product.getCategory().getName()}"></p>
   <hr>
   <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
-  <p th:text="'Наименование товара' + ${product.getTitle()}"></p>
+  <p th:text="'Наименование товара:  ' + ${product.getTitle()}"></p>
   <hr>
   <p th:text="${product.getDescription()}"></p>
   <hr>
@@ -20,7 +20,7 @@
   <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
     <br>
     <div th:each="img : ${product.getImageList()}">
-        <img th:src="'/img/'+${img.getFilename()}"
+        <img th:src="'/img/'+${img.getFilename()}">
     </div>
 </body>
 </html>

@@ -10,6 +10,18 @@
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <button type="submit">Выйти из личного кабинета</button>
     </form>
-<a href="admin/product/add"></a>
+<a href="admin/product/add">Добавить товар</a>
+<div th:each="product : ${products}">
+    <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
+    <p th:text="'Описание: ' + ${product.getDescription()}"></p>
+    <p th:text="'Цена: ' + ${product.getPrice()}"></p>
+    <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
+    <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
+    <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
+    <a th:href="@{admin/product/edit/{id}(id=${product.getId()})}">Редактирование товара</a>
+    <a th:href="@{admin/product/delete/{id}(id=${product.getId()})}">Удаление товара</a>
+    <!--Удаление и редактирование товаров 1:35-->
+    <hr>
+</div>
 </body>
 </html>

@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Информация о товаре</title>
+    <link th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
 </head>
 <body>
   <h3>Информация о товаре: </h3>
+  <a href="/product" style="padding-left: 40%">Вернуться назад</a>
   <p th:text="${product.getCategory().getName()}"></p>
   <hr>
   <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>

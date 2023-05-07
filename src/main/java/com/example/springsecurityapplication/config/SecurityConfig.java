@@ -38,7 +38,7 @@ public class SecurityConfig{
                 //с помощью permitAll указываем что не аутентифицированные пользователи могут заходить на перечисленные страницы
                 .requestMatchers("/admin").hasRole("ADMIN")
 
-                .requestMatchers("/authentication","/registration", "/error","/resources/**", "/static/**","/css/**", "/js/**", "/img/**", "/product", "/product/info/{id}").permitAll()//"/product - любой пользователь сможет зайти на эту страницу, т.е не юзер. Я этот спринг никогда не освою наверное"
+                .requestMatchers("/authentication","/registration", "/error","/resources/**", "/static/**","/css/**", "/js/**", "/img/**", "/product", "/product/info/{id}", "/product/search").permitAll()//"/product - любой пользователь сможет зайти на эту страницу, т.е не юзер. Я этот спринг никогда не освою наверное"
                 .anyRequest().hasAnyRole("USER", "ADMIN")
                 //.requestMatchers("/authentication", "/error","/registration").permitAll()
                 //что касается всех остальных  страниц необходимо вызвать метод authenticated(), который открывает форму аутентификации

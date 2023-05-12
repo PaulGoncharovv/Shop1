@@ -10,6 +10,7 @@
     Список доступных товаров
 </h3>
 <form th:method="POST" th:action="@{/product/search}">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     <fieldset> <!--РАМКА, LEGEND встроенное поле в окошко -->
         <legend> Выберите параметры для сортировки, поиска, фильтрации</legend>
         <label for="search"> Поиск по наименованию</label>
@@ -29,11 +30,11 @@
             <label for="descending_price">Отсортировать по убыванию цены</label>
             <p>Категория товаров: </p>
             <!--Категории товаров furniture/clothes/appliances-->
-            <input type="radio" id="furniture" name="contract">
+            <input type="radio" id="furniture" name="contract" value="furniture">
             <label for="furniture">Мебель</label>
-            <input type="radio" id="appliances" name="contract">
+            <input type="radio" id="appliances" name="contract" value="appliances">
             <label for="appliances">Бытовая техника</label>
-            <input type="radio" id="clothes" name="contract">
+            <input type="radio" id="clothes" name="contract" value="clothes">
             <label for="clothes">Одежда</label>
             <br>
             <br>
@@ -42,8 +43,18 @@
         </div>
     </fieldset>
 </form>
+<hr>
+<h3>Результат поиска сортировки и фильрации</h3>
+<div th:each="product : ${search_product}">
+    <img th:src="'/img/' + ${product.imageList[0].getFilename()}" width="300px">
+    <br>
+    <a th:href = "@{/product/info/{id}(id=${product.getId()})}"
+       th:text="${product.getTitle()}"></a>
+    <p th:text="'Цена товара:' + ${product.getPrice()}"></p>
 
-  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    <hr>
+</div>
+<hr>
   <div th:each="product : ${products}">
   <img th:src="'/img/' + ${product.imageList[0].getFilename()}" width="300px">
   <br>

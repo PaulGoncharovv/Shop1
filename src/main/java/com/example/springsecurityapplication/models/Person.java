@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -29,6 +30,13 @@ public class Person {
 
     @Column(name = "role")
     private String role;
+
+    @ManyToMany()
+    @JoinTable(name = "product_cart", joinColumns = @JoinColumn(name = "person_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private List<Product> productList;
+
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    private List<Order> orderList;
     public int getId() {
         return id;
     }

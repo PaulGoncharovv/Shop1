@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Заказы</title>
+</head>
+<body>
+    <h3>Заказы</h3>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+    <div th:each="order : ${orders}">
+        <h3 th:text="'Заказ №' + ${order.getNumber()}"></h3>
+        <img th:src="'/img/' + ${order.getProduct().getImageList()[0].getFilename()}"
+        width="300px">
+
+        <p th:text="'Наименование: ' + ${order.getProduct().getTitle()}">
+        </p>
+        <p th:text="'Количество: ' + ${order.getCount()}"></p>
+        <p th:text="'Цена: ' + ${order.getPrice()}">
+        </p>
+        <p th:text="'Дата заказа: ' + ${#temporals.format(order.getDateTime(), 'dd-MMM-yyyy')}"></p>
+        <p th:text="'Статус: ' + ${order.getStatus()}"></p>
+    </div>
+</body>
+</html>

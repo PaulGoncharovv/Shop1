@@ -11,6 +11,13 @@
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         <button type="submit">Выйти из личного кабинета</button>
     </form>
+ <br>
+    <div class="col-auto" style="margin-right: 10px">
+     <form th:action="@{/editPerson}">
+         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+         <button type="submit" class="btn btn-primary">Пользователи</button>
+     </form>
+    </div>
 <a href="admin/product/add">Добавить товар</a>
 <div th:each="product : ${products}">
     <p th:text="'Наименование: ' + ${product.getTitle()}"></p>

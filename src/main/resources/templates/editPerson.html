@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Редактирование объекта</title>
+</head>
+<body>
+
+<div class="header" style="
+    background-color: white;
+    margin-top: 10px;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 10px;">
+  <div class="logo" style="float: left">
+    <a href="/product">
+      ЛОГОТИП!
+    </a>
+  </div>
+  <div class="menu" style="
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;">
+    <div class="col-auto" style="margin-right: 10px">
+      <form method="get" th:action="@{/admin}">
+        <button type="submit" class="btn btn-primary">Назад</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">Поиск</span>
+    <input type="text" id="search" name="search" th:value="*{value_search}" class="form-control"
+           placeholder="Логин пользователя">
+  </div>
+
+  <h3>Перечень пользователей:</h3>
+  <br>
+  <div th:each="person : ${persons}">
+    <p th:text="'Id: ' + ${person.getId()}"></p>
+    <p th:text="'Логин: ' + ${person.getLogin()}"></p>
+    <p th:text="'Роль: ' + ${person.getRole()}"></p>
+    <!-- <a th:href="@{editPerson/{id}(id=${person.getId()})}">Редактирование пользователя</a> -->
+
+    <div class="col-auto" style="margin-right: 10px">
+      <form method="get" th:action="@{/editPerson/{id}(id=${person.getId()})}">
+        <button type="submit" class="btn btn-primary">Изменить роль</button>
+      </form>
+    </div>
+    <hr>
+  </div>
+</div>
+</div>
+
+</body>
+</html>

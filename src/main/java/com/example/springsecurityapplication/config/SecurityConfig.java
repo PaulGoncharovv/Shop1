@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+
+
 @Configuration
 public class SecurityConfig{
     private final PersonDetailsService personDetailsService;
@@ -52,6 +54,7 @@ public class SecurityConfig{
                 .failureUrl("/authentication?error")//Указываем куда необходимо перенаправить пользователя при провальной аутентификации. В запрос будет передан объект error, который будет проверяться на форме и при наличии данного объекта в запросе выводится - неправильный лог или пароль
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/authentication"); //Замену формы попробуй!
+
 
         return http.build();
     }

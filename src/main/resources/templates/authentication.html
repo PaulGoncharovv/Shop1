@@ -3,9 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Аутентификация пользователя</title>
-    <link th:href="@{/css/index.css}" type="text/css" rel="stylesheet">
 </head>
-<body>
+<body style='background-image: url("../img/home/background.jpg"); background-size: 100%;'>
+    <div style='padding-left: 50%;'>
+                        <div  style='background-color: gray; opacity: 90%; padding: 30%; width:30%; border-radius: 10px' >
+                            <h3 style='font-family: sans-serif'>Вход: </h3>
+                        <form method="post" action="/process_login">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <div>
+                                 <label class="form-label" for="username">Логин: </label>
+                                 <input type="text" name="username" id="username" class="form-control form-control-lg"/>
+                            </div>
+                            <br>
+                            <div>
+                                <label class="form-label" for="password">Пароль: </label>
+                                <input type="password" name="password" id="password"
+                                       class="form-control form-control-lg"/>
+                            </div>
+
+                            <button>Войти</button>
+                        </form>
+
+                        <div th:if="${param.error}" style="color: red">
+                            Неправильный логин или пароль
+                        </div>
+
+                        <p>Еще не зарегестрировались?</p>
+                        <a href="/registration">Зарегистрироваться</a>
+                        </div>
+    </div>
+
+<!--
   <h3>Вход</h3>
 <form method="post" action="/process_login">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
@@ -20,5 +48,6 @@
   Вы ввели неправильный логин или пароль
 </div>
 <a href="/registration" style="text-decoration: none">Регистрация</a>
+-->
 </body>
 </html>

@@ -1,9 +1,9 @@
 package com.example.springsecurityapplication.controllers;
 
-import com.example.springsecurityapplication.models.Category;
-import com.example.springsecurityapplication.models.Image;
-import com.example.springsecurityapplication.models.Product;
+import com.example.springsecurityapplication.models.*;
 import com.example.springsecurityapplication.repositories.CategoryRepository;
+import com.example.springsecurityapplication.repositories.PersonRepository;
+import com.example.springsecurityapplication.services.PersonService;
 import com.example.springsecurityapplication.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,8 +19,9 @@ import java.util.UUID;
 
 @Controller
 public class AdminController {
-
     private final ProductService productService;
+    private final PersonService personService;
+    private final PersonRepository personRepository;
 
     //Путь для фотографий
     @Value("${upload.path}")
@@ -28,8 +29,10 @@ public class AdminController {
 
     private final CategoryRepository categoryRepository;
 
-    public AdminController(ProductService productService, CategoryRepository categoryRepository) {
+    public AdminController( ProductService productService, PersonService personService, PersonRepository personRepository, CategoryRepository categoryRepository) {
         this.productService = productService;
+        this.personService = personService;
+        this.personRepository = personRepository;
         this.categoryRepository = categoryRepository;
     }
 
@@ -153,6 +156,46 @@ public class AdminController {
         productService.updateProduct(id, product);
         return "redirect:/admin";
     }
+    //////////////////////////// СМЕНА РОЛИ ЮЗЕРА
+    @GetMapping("/editPerson")
+    public String editPerson(Model model){
+        model.addAttribute("persons", personService.getAllPerson());
+        return "editPerson";
+    }
 
+    @GetMapping("/editPerson/{id}")
+    public String changeRoleById(@PathVariable("id") int id, Model model){
+        Person person = personService.getPersonId(id);
+        String role_person = person.getRole();
+        if (!person.getLogin().equals("admin")){
+            if (!role_person.equals("ROLE_USER")){
+                role_person = "ROLE_USER";
+            } else {
+                role_person = "ROLE_ADMIN";
+            }
+        }
+        person.setRole(role_person);
+        personRepository.save(person);
+
+        model.addAttribute("person");
+        return "redirect:/editPerson";
+    }
+    //////////////////////////////////////////
+/* //Я ПЫТАВСЯ!
+    @GetMapping("/admin/view_orders/{id}")
+    public String viewOrdersByPerson(@PathVariable("id") int id, Model model){
+        model.addAttribute("users", personRepository.findAll());
+        model.addAttribute("products", productService.getAllProduct());
+        model.addAttribute("orders", orderPersonRepository.findOrdersByPersonId(id));
+        model.addAttribute("status", status);
+        return "/admin";
+    }
+    @PostMapping("/admin/view_orders/{id}")
+    public String editOrderPerson(@ModelAttribute("orderperson")@Valid OrderPerson orderPerson, @PathVariable("id") int id, @RequestParam("status") Status status){
+        OrderPerson orderPerson1 = orderPersonRepository.findOrderById(integer.parseInt(idOrder));
+        orderPerson1.setStatus(Status.valueOf(status));
+        orderPersonRepository.save(orderPerson1);
+        return "redirect:/admin/view_orders/{id}";
+    }*/
 
 }

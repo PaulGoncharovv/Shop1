@@ -1,24 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Кабинет администратора</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+          content="Motorcraft — интернет магазин автомобильных жидкостей с доставкой и по приемлемым ценам.">
+    <meta name="Keywords" content="Моторное масло, 5w-30, pfvtyf vfckf, замена масла, дешевое моторное масло">
+    <meta name="author" content="Гончаров Павел Сергеевич">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/iceland');
+    </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
 </head>
 <body>
- <h1>Личный кабинет администратора</h1>
-    <a href="/product" style="padding-left: 40%">Вернуться назад</a>
-    <form method="post" th:action="@{/logout}" style="padding-left: 40%">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-        <button type="submit">Выйти из личного кабинета</button>
-    </form>
- <br>
+    <div style="
+    margin-top: 30px;
+    clear: both;
+    background-color:orange;
+    height: 30px;
+    padding: 10px;">
+    </div>
+    <h1 style="display: inline;">Личный кабинет администратора</h1> 
+
+    <a href="/product" style="display: inline;  padding-left: 60%;  text-decoration: none">Вернуться назад</a>
+
+    <hr>
+<div class="menu" style="
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;">
+ 
+    <br>
     <div class="col-auto" style="margin-right: 10px">
      <form th:action="@{/editPerson}">
          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-         <button type="submit" class="btn btn-primary">Пользователи</button>
+         <button type="submit" class="btn btn-warning">Пользователи</button>
      </form>
     </div>
-<a href="admin/product/add">Добавить товар</a>
+    <br>
+    <div class="col-auto" style="margin-right: 10px">
+        <form action="admin/product/add" target="_blank">
+            <button type="submit" class="btn btn-warning">Добавить объект</button>
+        </form>
+    </div>
+    <br>
+    <div class="col-auto" style="margin-right: 10px">
+        <form method="post" th:action="@{/logout}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+            <button type="submit" class="btn btn-warning">Выйти из личного кабинета</button>
+        </form>
+    </div>
+    <hr>
+</div>
+<hr>
+
+<div class="container" style="border-color: orangered; border-radius: 10px; padding: 5%;">
+    <h3>Описание товара</h3>
+    <hr>
 <div th:each="product : ${products}">
     <p th:text="'Наименование: ' + ${product.getTitle()}"></p>
     <p th:text="'Описание: ' + ${product.getDescription()}"></p>
@@ -26,10 +69,25 @@
     <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
     <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
     <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
-    <a th:href="@{admin/product/edit/{id}(id=${product.getId()})}">Редактирование товара</a>
-    <a th:href="@{admin/product/delete/{id}(id=${product.getId()})}">Удаление товара</a>
+    <a th:href="@{admin/product/edit/{id}(id=${product.getId()})}" style="text-decoration: none">Редактирование товара</a>
+    <a th:href="@{admin/product/delete/{id}(id=${product.getId()})}" style="text-decoration: none">Удаление товара</a>
     <!--Удаление и редактирование товаров 1:35-->
     <hr>
+</div>    
+</div>  
+<footer class="foot" style="margin-top: 20px;clear: both;background-color:orange;height: 50px;padding: 10px;"> <!-- Футтер -->
+    <div>
+        <img src="/img/home/logo1.png" alt="Motorcraft" style="height: 20px;">
+        <p style="color: white; font-weight: bolder; font-family: 'Iceland', sans-serif; display: inline; font-size: 14pt;  text-shadow: black 1px 1px 0, black -1px -1px 0, 
+        black -1px 1px 0, black 1px -1px 0;">Motorcraft</p>
+        <p style="display: inline; font-size: small; font-family: sans-serif; font-weight:bold; color: white; text-shadow: black 1px 1px 0, black -1px -1px 0, 
+        black -1px 1px 0, black 1px -1px 0;">©,  2023г.</p>
+    </div>
+</footer>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous">
+</script>
 </body>
 </html>

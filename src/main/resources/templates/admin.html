@@ -24,10 +24,13 @@
     padding: 10px;">
     </div>
     <h1 style="display: inline;">Личный кабинет администратора</h1> 
-
-    <a href="/product" style="display: inline;  padding-left: 60%;  text-decoration: none">Вернуться назад</a>
-
-    <hr>
+    <div class="col-auto" style="margin-right: 10px; display: flex;
+    justify-content: flex-end;" >
+    <form>
+        <button type="submit" class="btn btn-warning">Вернуться назад</button>
+    </form>
+    </div>
+    <hr>    
 <div class="menu" style="
     height: 80px;
     display: flex;
@@ -45,7 +48,7 @@
     <br>
     <div class="col-auto" style="margin-right: 10px">
         <form action="admin/product/add" target="_blank">
-            <button type="submit" class="btn btn-warning">Добавить объект</button>
+            <button type="submit" class="btn btn-warning">Добавить товар</button>
         </form>
     </div>
     <br>
@@ -69,7 +72,7 @@
     <p th:text="'Склад: ' + ${product.getWarehouse()}"></p>
     <p th:text="'Продавец: ' + ${product.getSeller()}"></p>
     <p th:text="'Категория: ' + ${product.getCategory().getName()}"></p>
-    <a th:href="@{admin/product/edit/{id}(id=${product.getId()})}" style="text-decoration: none">Редактирование товара</a>
+    <a th:href="@{admin/product/edit/{id}(id=${product.getId()})}" style="text-decoration: none">Редактирование товара</a><br>
     <a th:href="@{admin/product/delete/{id}(id=${product.getId()})}" style="text-decoration: none">Удаление товара</a>
     <!--Удаление и редактирование товаров 1:35-->
     <hr>

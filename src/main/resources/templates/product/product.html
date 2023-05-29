@@ -29,6 +29,30 @@
 <h3>
     Список доступных товаров
 </h3>
+<div class="menu" style="
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;"> 
+            <div class="col-auto" style="margin-right: 10px">
+                <button type="submit" class="btn btn-warning">О нас</button>
+                </form>
+            </div>
+
+            <div class="col-auto" style="margin-right: 10px">
+                <form>
+                    <button type="submit" class="btn btn-warning">Заявка на замену масла</button>
+                </form>
+            </div>
+            <!-- ВХОД! -->
+            <div class="col-auto" style="margin-right: 10px">
+                <form th:action="@{/authentication}">
+                    <button type="submit" class="btn btn-warning">Войти</button>
+                </form>
+            </div>
+        </div>
+
 <form th:method="POST" th:action="@{/product/search}">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
     <fieldset> <!--РАМКА, LEGEND встроенное поле в окошко -->
